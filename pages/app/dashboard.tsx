@@ -4,8 +4,13 @@ import currentStreakImage from "../../assets/Current-streak.png"
 import wallClockImage from "../../assets/wall-clock.png"
 import Image from "next/image"
 import UserImage from "../../dummy/user.jpg"
+import Consistency from "../../models/Consistency"
 
-const Dashboard = ()=>{
+type DashboardProps = {
+    consitency : any[]
+}
+
+const Dashboard = ({consitency} : DashboardProps)=>{
     return(
         <WithNavbar>
             <div className="mx-10 mt-3 w-full flex flex-row">
@@ -40,32 +45,65 @@ const Dashboard = ()=>{
                                 <p className="text-sm font-medium mt-1">Aug 23 - Sept 16</p>
                             </div>
                         </section>
+                        <section className="theme-bg-accent mt-5 rounded-lg fex flex-col justify-start items-center w-full">
+                            <div className="bg-primary w-fit rounded-md py-1 px-2 text-white text-sm font-medium">Consitency</div>
+
+                        </section>
                     </section>
                 </div>
                 <section className="w-1/3 p-2">
                     <div className=" w-full h-auto flex flex-row items-center justify-end">
                         <Image className=" rounded-full" width="50px" height="50px" src={UserImage} />
                     </div>
-                    <div className=" mt-7 w-full h-auto flex flex-row justify-between items-center">
+                    <section className=" mt-7 w-full h-auto flex flex-row justify-between items-center">
                         <div className="flex flex-col items-center">
-                            <p className="text-[#1DA1F2] font-bold text-sm">1,200</p>
+                            <p className="text-[#1DA1F2] font-bold text-m">1,200</p>
                             <p className="text-[#464447] font-normal text-sm">Followers</p>
                         </div>
 
                         <div className="flex flex-col items-center">
-                            <p className="text-[#1DA1F2] font-bold text-sm">500</p>
+                            <p className="text-[#1DA1F2] font-bold text-m">500</p>
                             <p className="text-[#464447] font-normal text-sm">Following</p>
                         </div>
 
                         <div className="flex flex-col items-center">
-                            <p className="text-[#1DA1F2] font-bold text-sm">50</p>
+                            <p className="text-[#1DA1F2] font-bold text-m">50</p>
                             <p className="text-[#464447] font-normal text-sm">Tweets</p>
                         </div>
-                    </div>
+                    </section>
+                    <section className=" w-full flex flex-col justify-start items-center py-10">
+                        <div className="w-full flex flex-row justify-center items-center">
+                            <div className="w-2/3 relative h-2 flex flex-col justify-center bg-[#D9D9D9] rounded-full">
+                                <div className=" h-[0.6rem] absolute bg-[#57FF4E] rounded-full" style={{width:"65%"}}></div>
+                            </div>
+                            <p className=" theme-text ml-3">65%</p>
+                        </div>
+                        <p className=" theme-text font-semibold text-sm mt-3">1200/1500</p>
+                        <p className=" text-secondary font-semibold text-sm">Target Followers</p>
+                    </section>
                 </section>
             </div>
         </WithNavbar>
     )
+}
+
+export async function getServerSideProps(){
+    const start = new Date(2022,0,1)
+    const end = new Date(2022,11,31)
+    const consitency : Consistency[] = [];
+    while(start <= end){
+        // days.push(new Date(start))
+        consitency.push({date:`${start.getFullYear()}/${start.getMonth()}/${start.getDate()}`,count: Math.floor(Math.random()*10)})
+        start.setDate(start.getDate()+1)
+    }
+
+    console.log(consitency)
+
+    return{
+        props: {
+            consitency
+        }
+    }
 }
 
 export default Dashboard
