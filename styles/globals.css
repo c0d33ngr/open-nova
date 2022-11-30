@@ -27,4 +27,8 @@
     @apply rounded-full;
     @apply p-4;
   }
+
+  .cell {
+    @apply bg-cellDark
+  }
 }

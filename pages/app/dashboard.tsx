@@ -5,6 +5,7 @@ import wallClockImage from "../../assets/wall-clock.png"
 import Image from "next/image"
 import UserImage from "../../dummy/user.jpg"
 import Consistency from "../../models/Consistency"
+import Heatmap from "../../components/Heatmap"
 
 type DashboardProps = {
     consitency : any[]
@@ -47,7 +48,7 @@ const Dashboard = ({consitency} : DashboardProps)=>{
                         </section>
                         <section className="theme-bg-accent mt-5 rounded-lg fex flex-col justify-start items-center w-full">
                             <div className="bg-primary w-fit rounded-md py-1 px-2 text-white text-sm font-medium">Consitency</div>
-
+                            <Heatmap startDate="2022/1/1" values={consitency} />
                         </section>
                     </section>
                 </div>
@@ -89,15 +90,13 @@ const Dashboard = ({consitency} : DashboardProps)=>{
 
 export async function getServerSideProps(){
     const start = new Date(2022,0,1)
-    const end = new Date(2022,11,31)
+    const end = new Date(2022,5,30)
     const consitency : Consistency[] = [];
     while(start <= end){
         // days.push(new Date(start))
         consitency.push({date:`${start.getFullYear()}/${start.getMonth()}/${start.getDate()}`,count: Math.floor(Math.random()*10)})
         start.setDate(start.getDate()+1)
     }
-
-    console.log(consitency)
 
     return{
         props: {
