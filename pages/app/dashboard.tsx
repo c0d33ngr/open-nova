@@ -46,8 +46,8 @@ const Dashboard = ({consitency} : DashboardProps)=>{
                                 <p className="text-sm font-medium mt-1">Aug 23 - Sept 16</p>
                             </div>
                         </section>
-                        <section className="theme-bg-accent mt-5 rounded-lg fex flex-col justify-start items-center w-full overflow-x-scroll py-2">
-                            <div className="bg-primary w-fit rounded-md py-1 px-2 text-white text-sm font-medium">Consitency</div>
+                        <section className="theme-bg-accent mt-5 rounded-lg fex flex-col justify-start items-center w-full overflow-x-scroll py-2 px-3">
+                            <div className="bg-primary w-fit rounded-md py-1 px-2 text-white text-sm font-medium mb-3">Consitency</div>
                             <Heatmap startDate="2022/1/12" values={consitency} />
                         </section>
                     </section>
