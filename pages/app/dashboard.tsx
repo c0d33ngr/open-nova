@@ -46,9 +46,9 @@ const Dashboard = ({consitency} : DashboardProps)=>{
                                 <p className="text-sm font-medium mt-1">Aug 23 - Sept 16</p>
                             </div>
                         </section>
-                        <section className="theme-bg-accent mt-5 rounded-lg fex flex-col justify-start items-center w-full">
+                        <section className="theme-bg-accent mt-5 rounded-lg fex flex-col justify-start items-center w-full overflow-x-scroll py-2">
                             <div className="bg-primary w-fit rounded-md py-1 px-2 text-white text-sm font-medium">Consitency</div>
-                            <Heatmap startDate="2022/1/1" values={consitency} />
+                            <Heatmap startDate="2022/1/12" values={consitency} />
                         </section>
                     </section>
                 </div>
@@ -89,8 +89,8 @@ const Dashboard = ({consitency} : DashboardProps)=>{
 }
 
 export async function getServerSideProps(){
-    const start = new Date(2022,0,1)
-    const end = new Date(2022,5,30)
+    const start = new Date(2022,0,12)
+    const end = new Date(2022,11,30)
     const consitency : Consistency[] = [];
     while(start <= end){
         // days.push(new Date(start))
