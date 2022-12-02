@@ -59,8 +59,8 @@ const Cell = ({date, value, max} : CellProps)=>{
     },[])
 
     return(
-        <div className=" w-3 h-3 cell rounded-sm">
-            <div className=" absolute theme-bg rounded-md -translate-x-1/2 p-2 -translate-y-16 flex-col z-20" style={{display:displayTooltip && isActive ? "flex":"none"}}>
+        <div className="relative w-3 h-3 cell rounded-sm">
+            <div className=" absolute theme-bg rounded-md -translate-x-1/2 p-2 -translate-y-16 flex-col z-20 w-36" style={{display:displayTooltip && isActive ? "flex":"none"}}>
                 <p className="theme-text-accent">date: {date}</p>
                 <p className="theme-text-accent">Tweets: {value}</p>
             </div>

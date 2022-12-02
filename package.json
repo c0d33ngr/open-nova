@@ -8,6 +8,7 @@
   "dependencies": {
     "next": "latest",
     "react": "18.1.0",
+    "react-chartjs-2": "^5.0.1",
     "react-dom": "18.1.0"
   },
   "devDependencies": {

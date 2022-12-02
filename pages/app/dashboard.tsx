@@ -6,12 +6,24 @@ import Image from "next/image"
 import UserImage from "../../dummy/user.jpg"
 import Consistency from "../../models/Consistency"
 import Heatmap from "../../components/Heatmap"
+import { Line } from "react-chartjs-2"
 
 type DashboardProps = {
     consitency : any[]
 }
 
 const Dashboard = ({consitency} : DashboardProps)=>{
+    const weeklyData = {
+        labels: ["Mon","Tue","Wed","Thu","Fri","Sat"],
+        datasets : [
+            {
+                label : "Tweets",
+                data: [3,3,4,5,8,2,4],
+                borderColor: "#FFE200",
+                tension: 0.5
+            }
+        ]
+    }
     return(
         <WithNavbar>
             <div className="mx-10 mt-3 w-full flex flex-row">
@@ -47,8 +59,14 @@ const Dashboard = ({consitency} : DashboardProps)=>{
                             </div>
                         </section>
                         <section className="theme-bg-accent mt-5 rounded-lg fex flex-col justify-start items-center w-full overflow-x-scroll py-2 px-3">
-                            <div className="bg-primary w-fit rounded-md py-1 px-2 text-white text-sm font-medium mb-3">Consitency</div>
+                            <div className="bg-primary absolute w-fit rounded-md py-1 px-2 text-white text-sm font-medium mb-3">Consitency</div>
+                            <div className=" h-8"></div>
                             <Heatmap startDate="2022/1/12" values={consitency} />
+                        </section>
+                        <section className="theme-bg-accent mt-5 rounded-lg fex flex-col justify-start items-center w-full overflow-x-scroll py-2 px-3">
+                            <div className="bg-primary absolute w-fit rounded-md py-1 px-2 text-white text-sm font-medium mb-3">Weekly</div>
+                            <div className=" h-8"></div>
+                            <Line data={weeklyData} />
                         </section>
                     </section>
                 </div>
