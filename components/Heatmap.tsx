@@ -30,14 +30,14 @@ const Heatmap = ({values,startDate}:HeatmapProps)=>{
     return(
         <div className="w-fit">
             <div className=" w-full flex flex-row justify-evenly h-fit pl-3">
-                {months.map((m) => <p className=" font-medium text-xs theme-text">{m}</p>)}
+                {months.map((m) => <p key={m} className=" font-medium text-xs theme-text">{m}</p>)}
             </div>
             <div className="w-full h-fit flex flex-row justify-start items-atart">
                 <div className=" grid grid-rows-7 grid-flow-col">
-                    {days.map((d,i) => <div className=" flex justify-center items-center theme-text h-3 p-0 m-0 text-xs">{i % 2 != 0 && d}</div>)}
+                    {days.map((d,i) => <div key={d} className=" flex justify-center items-center theme-text h-3 p-0 m-0 text-xs">{i % 2 != 0 && d}</div>)}
                 </div>
                 <div className="grid grid-rows-7 grid-flow-col gap-1 mt-0">
-                    {points.map((v) => <Cell max={max} date={v.date}  value={v.count}/>)}
+                    {points.map((v) => <Cell key={v.date} max={max} date={v.date}  value={v.count}/>)}
                 </div>
             </div>
         </div>
