@@ -6,7 +6,8 @@ import Image from "next/image"
 import UserImage from "../../dummy/user.jpg"
 import Consistency from "../../models/Consistency"
 import Heatmap from "../../components/Heatmap"
-import { Line } from "react-chartjs-2"
+import { Line , Bar } from "react-chartjs-2"
+import CustomBar from "../../components/CustomBar"
 
 type DashboardProps = {
     consitency : any[]
@@ -23,6 +24,11 @@ const Dashboard = ({consitency} : DashboardProps)=>{
                 tension: 0.5
             }
         ]
+    }
+
+    const engagementData = {
+        labels:[0,1,2,3,4,5,6,7,8,9],
+        values:[5,7,9,3,4,9,6,2,8,9],
     }
     return(
         <WithNavbar>
@@ -99,6 +105,11 @@ const Dashboard = ({consitency} : DashboardProps)=>{
                         </div>
                         <p className=" theme-text font-semibold text-sm mt-3">1200/1500</p>
                         <p className=" text-secondary font-semibold text-sm">Target Followers</p>
+                    </section>
+                    <section className="theme-bg-accent mt-5 rounded-lg fex flex-col justify-start items-center">
+                            <div className="bg-primary absolute w-fit rounded-md py-1 px-2 text-white text-sm font-medium mb-3">Engagement</div>
+                            <div className=" h-8"></div>
+                            <CustomBar labels={engagementData.labels} values={engagementData.values} />
                     </section>
                 </section>
             </div>
