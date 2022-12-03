@@ -8,6 +8,7 @@ const WithNavbar = ({ children } : WithNavbarType)=>{
     return(
         <div className="flex flex-row">
             <Navbar />
+            <div className="w-1/5" />
             {children}
         </div>
     )

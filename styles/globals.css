@@ -27,4 +27,20 @@
     @apply rounded-full;
     @apply p-4;
   }
+
+  .cell {
+    @apply bg-cellDark
+  }
 }
+
+::-webkit-scrollbar{
+  width: 1px;
+}
+::-webkit-scrollbar-thumb{
+  border-radius: 2rem;
+  background-color: rgb(39, 39, 39);
+}
+
+/* body{
+  overflow: hidden;
+} */
