@@ -6,7 +6,7 @@ import Image from "next/image"
 import UserImage from "../../dummy/user.jpg"
 import Consistency from "../../models/Consistency"
 import Heatmap from "../../components/Heatmap"
-import { Line , Bar } from "react-chartjs-2"
+import { Line } from "react-chartjs-2"
 import CustomBar from "../../components/CustomBar"
 
 type DashboardProps = {
@@ -30,6 +30,7 @@ const Dashboard = ({consitency} : DashboardProps)=>{
         labels:[0,1,2,3,4,5,6,7,8,9],
         values:[5,7,9,3,4,9,6,2,8,9],
     }
+
     return(
         <WithNavbar>
             <div className="mx-10 mt-3 w-full flex flex-row">
