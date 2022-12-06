@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react"
-import Consistency from "../models/Consistency"
+import ConstencyModel from "../models/ConsistencyModel"
 
 type HeatmapProps = {
-    values: Consistency[],
+    values: ConstencyModel[],
     startDate : string
 }
 
 const Heatmap = ({values,startDate}:HeatmapProps)=>{
-    const [points,setPoints] = useState<Consistency[]>([])
+    const [points,setPoints] = useState<ConstencyModel[]>([])
     const [max,setMax] = useState<number>(0);
     const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
     const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]

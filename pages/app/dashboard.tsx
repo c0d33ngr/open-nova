@@ -4,7 +4,7 @@ import currentStreakImage from "../../assets/Current-streak.png"
 import wallClockImage from "../../assets/wall-clock.png"
 import Image from "next/image"
 import UserImage from "../../dummy/user.jpg"
-import Consistency from "../../models/Consistency"
+import ConsistencyModel from "../../models/ConsistencyModel"
 import Heatmap from "../../components/Heatmap"
 import { Line } from "react-chartjs-2"
 import CustomBar from "../../components/CustomBar"
@@ -121,7 +121,7 @@ const Dashboard = ({consitency} : DashboardProps)=>{
 export async function getServerSideProps(){
     const start = new Date(2022,0,12)
     const end = new Date(2022,11,30)
-    const consitency : Consistency[] = [];
+    const consitency : ConsistencyModel[] = [];
     while(start <= end){
         // days.push(new Date(start))
         consitency.push({date:`${start.getFullYear()}/${start.getMonth()}/${start.getDate()}`,count: Math.floor(Math.random()*10)})
