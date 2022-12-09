@@ -4,7 +4,10 @@ import Router from "next/router"
 import twitterClient from "../../twitter"
 import getBaseUrl from "../../helpers/getBaseUrl"
 
-const Token = ({state}:any)=>{
+const Token = ({state,err}:any)=>{
+    useEffect(()=>{
+        console.log(JSON.parse(err))
+    })
     return(
         <div>
             <p className="text-white">{state}</p>
@@ -15,15 +18,17 @@ const Token = ({state}:any)=>{
 export async function getServerSideProps(data:any){
     // const redirectURL:string = data.req.headers.referer.split("?")[0]
     let state = "failed"
+    let err = null
     try{
         const res = await twitterClient.getTokens(getBaseUrl()+"/auth/token",data.query.state,data.query.code)
         state = "authenticated"
-    }catch(e){
+    }catch(e:any){
+        err = e
         state = "failed"
     }
     
     return{
-        props:{state}
+        props:{state,err:JSON.stringify(err)}
     }
 }
 

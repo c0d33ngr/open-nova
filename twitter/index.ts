@@ -48,7 +48,7 @@ function getTokens(redirectURL:string,state:string,code:string){
             resolve("solved")
         }catch(e){
             console.log(e)
-            reject({message:"err"})
+            reject(e)
         }
     })
 }
