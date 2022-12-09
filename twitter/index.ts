@@ -44,11 +44,11 @@ function getTokens(redirectURL:string,state:string,code:string){
                     }
                 }
             );
-            
+            console.log(res)
             resolve("solved")
         }catch(e){
-            console.log(e)
-            reject(e)
+            const err: CustomError = {message : 'Unavle to authenticate user',err:e}
+            reject()
         }
     })
 }

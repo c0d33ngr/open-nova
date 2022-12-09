@@ -4,31 +4,26 @@ import Router from "next/router"
 import twitterClient from "../../twitter"
 import getBaseUrl from "../../helpers/getBaseUrl"
 
-const Token = ({state,err}:any)=>{
-    useEffect(()=>{
-        console.log(JSON.parse(err))
-    })
+const Token = ({authenticated}:any)=>{
+    
     return(
         <div>
-            <p className="text-white">{state}</p>
+            <p className="text-white">{authenticated ? "Authenticated" : "Authentication failed"}</p>
         </div>
     )
 }
 
 export async function getServerSideProps(data:any){
-    // const redirectURL:string = data.req.headers.referer.split("?")[0]
-    let state = "failed"
-    let err = null
+    let authenticated = false;
     try{
         const res = await twitterClient.getTokens(getBaseUrl()+"/auth/token",data.query.state,data.query.code)
-        state = "authenticated"
+        authenticated = true
     }catch(e:any){
-        err = e
-        state = "failed"
+        authenticated = false
     }
     
     return{
-        props:{state,err:JSON.stringify(err)}
+        props:{authenticated}
     }
 }
 
