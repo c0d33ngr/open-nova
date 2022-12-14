@@ -1,6 +1,6 @@
 import Router from "next/router"
 import { useEffect } from "react"
-import twitterClient from "../../twitter"
+import twitterClient from "../../twitter/backend"
 
 const Auth = ()=>{
     const loginWithTwitter = ()=>{
