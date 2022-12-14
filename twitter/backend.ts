@@ -1,32 +1,18 @@
 import axios from "axios"
-import { Router } from "next/router";
-import { NextResponse } from "next/server";
-import CustomError from "../types/CustomError";
+import CustomError from "../types/CustomError"
+import TwitterTokens from "../types/TwitterTokens"
+import {twitterClientId , twitterClientSecret, scopes, state} from "./config"
 
-let twitterClientId:string = process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID!
-let twitterClientSecret: string = process.env.NEXT_PUBLIC_TWITTER_CLIENT_SECRET!
-let scopes:string[] = ["tweet.read","users.read","follows.read","offline.access"]
-let state:string = (Math.random()*1000).toString()
-
-
-function init(twitterClientId:string, twitterClientSecret: string,scopes?:string[]){
-    twitterClientId = twitterClientId
-    twitterClientSecret = twitterClientSecret
-    if(scopes == undefined){
-        scopes = ["tweet.read","users.read","follows.read","offline.access"]
-    }
-    state = (Math.random()*1000).toString()
-    scopes = scopes
-}
-
+// backend code
 function auth(redirectURL:string){
     console.log(window.location)
     const authUrl = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${twitterClientId}&redirect_uri=${redirectURL}&scope=${scopes.join('%20')}&state=${state}&code_challenge=challenge&code_challenge_method=plain`
     window.location.replace(authUrl)
 }
 
+// backend code
 function getTokens(redirectURL:string,state:string,code:string){
-    return new Promise(async(resolve,reject) => {
+    return new Promise<TwitterTokens>(async(resolve,reject) => {
         try{
             const res = await axios.post(
                 'https://api.twitter.com/2/oauth2/token',
@@ -44,14 +30,19 @@ function getTokens(redirectURL:string,state:string,code:string){
                     }
                 }
             );
-            console.log(res)
-            resolve("solved")
+            const tokens: TwitterTokens = {
+                tokenType : res.data.token_type,
+                accessToken : res.data.access_token,
+                refreshToken : res.data.refresh_token,
+                scope : res.data.scope
+            }
+            resolve(tokens)
         }catch(e){
             const err: CustomError = {message : 'Unavle to authenticate user',err:e}
-            reject()
+            reject(err)
         }
     })
 }
 
 
-export default {init,auth,getTokens}
+export default {auth,getTokens}

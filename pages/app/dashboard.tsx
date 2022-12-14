@@ -8,6 +8,8 @@ import ConsistencyModel from "../../models/ConsistencyModel"
 import Heatmap from "../../components/Heatmap"
 import { Line } from "react-chartjs-2"
 import CustomBar from "../../components/CustomBar"
+import { useEffect } from "react"
+
 
 type DashboardProps = {
     consitency : any[]
@@ -127,7 +129,6 @@ export async function getServerSideProps(){
         consitency.push({date:`${start.getFullYear()}/${start.getMonth()}/${start.getDate()}`,count: Math.floor(Math.random()*10)})
         start.setDate(start.getDate()+1)
     }
-
     return{
         props: {
             consitency
